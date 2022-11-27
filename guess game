@@ -1,0 +1,95 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+void guess(int*number)
+      {
+	   srand(time(0));
+	   *number=((rand()%99)+1);
+      }
+void game(int*round, int*guess_number,int*player_number,char*status)
+  {
+				if (*guess_number==*player_number)
+				
+	   { 
+	        printf("\nYou win the game! The number was %d",*guess_number);
+	        
+   *status='W';
+     
+       }  
+else
+  {
+     if(*round==3)
+     
+       {	
+        printf("\nYou lost the game! The number was %d",*guess_number);
+	   }    
+else 
+       {
+   	  if(*guess_number<*player_number)
+   	  printf("\nTry a smaller number!\n");
+else
+   	  printf("\nTry a bigger number!\n");
+    	}   
+*status='L';
+ }
+}
+
+int main()
+{
+	int t_amount;
+	int bet_amount;
+	int number;
+	int round;
+	int user_guess;
+	char choise;
+	char status;
+	printf("Enter  a start account for the game $:");
+	scanf("%d",&t_amount);
+	
+	if(t_amount<=0)
+	  {
+		printf("Invalid balance to play");
+		exit(0);
+      }
+do
+   {
+	printf("Enter the bet amount:");
+	scanf("%d",&bet_amount);
+	if(bet_amount>t_amount)
+	    {
+		printf("Bet amount should be lesser than or equal to total amount");
+		continue;		
+	   }
+	   
+	guess(&number);
+	for(round=1 ; round<=3;round ++)
+	{
+		printf("Enter a number between 0 to 100:");
+		scanf("%d", &user_guess);
+		game(&round,&number,&user_guess,&status);
+		if(status=='W')
+		    {
+			t_amount = t_amount + bet_amount;
+			break;
+		    }
+		    if(round==3 && status=='L')
+		    t_amount=t_amount-bet_amount;
+		    
+	}
+	if(t_amount>0)
+	    {
+		printf("\nYour account is %d $",t_amount);
+		printf("\nDo you want to play again?(y/n)\n");
+		scanf("%c ",&choise);
+		}
+	else 
+	printf("\n You lost your all money!");
+	
+} while((choise=='N'||choise=='n') && t_amount>0);
+  
+  
+  printf("\nThank you for playing.See you next time!");
+  
+return 0;
+
+}
