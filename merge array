@@ -1,0 +1,95 @@
+#include<stdio.h> 
+#include<stdlib.h> 
+ 
+/* Dynamically allocate memory for array */ 
+int* create_array(int size) 
+{ 
+	int*  temp; 
+	temp=(int *)malloc(sizeof(int)*size); 
+	return temp; 
+} 
+ 
+/* Store the values in array */ 
+void value_array(int **arr,int size) 
+{ 
+	int i,temp; 
+	for(i=0;i<size;i++) 
+	{ 
+		printf(" Enter element %d : ",i+1); 
+		scanf("%d",&temp); 
+		*(*(arr)+i)=temp; 
+	} 
+} 
+ 
+/* Reverse the array */ 
+void reverse_array(int **arr,int size) 
+{ 
+	int i,j,temp; 
+	int x[size]; 
+	for(i=size-1,j=0 ; i>=0 ; i--,j++) 
+		x[j]=*(*(arr)+i); 
+	for(i=0;i<size;i++) 
+		*(*(arr)+i)=x[i]; 
+} 
+ 
+/* Print the array on console */ 
+void print_array(int *arr,int size) 
+{ 
+	int i; 
+	for(i=0;i<size;i++) 
+		printf("%d ",arr[i]); 
+} 
+ 
+/* Merge the two arrays into third array */ 
+int* merge_array(int *a,int *b,int s1,int s2) 
+{ 
+	int *arr; 
+	int i,j; 
+	int size=s1+s2; 
+	arr=(int*)malloc(size*sizeof(int)); 
+	i=0; 
+	 
+	for(j=0 ; j<s1 ; j++) 
+		arr[i++]=a[j]; 
+	for(j=0 ; j<s2 ; j++) 
+		arr[i++]=b[j]; 
+ 
+	return arr; 
+} 
+ 
+int main() 
+{ 
+	int *a1,*a2,*m; 
+	int s1,s2; 
+	 
+	/* Taking Array_1 */ 
+	printf("Enter the size of 1st array : "); 
+	scanf("%d",&s1); 
+	a1=create_array(s1); 
+	printf("\nEnter %d numbers for Array_1 :\n",s1); 
+	value_array(&a1,s1); 
+	 
+	/* Taking Array_2 */ 
+	printf("\nEnter the size of 2nd array :"); 
+	scanf("%d",&s2); 
+	a2=create_array(s2); 
+	printf("\nEnter %d numbers for Array_2 :\n",s2); 
+	value_array(&a2,s2); 
+	 
+	/* Reversing the Arrays */ 
+	reverse_array(&a1,s1); 
+	reverse_array(&a2,s2); 
+	 
+	/* Printing the reversed arrays */ 
+	printf("\n\nArray_1 is : "); 
+	print_array(a1,s1); 
+	printf("\nArray_2 is : "); 
+	print_array(a2,s2); 
+	 
+	/* Merging the two arrays and printing the merged array */ 
+	m=merge_array(a1,a2,s1,s2); 
+	printf("\n\n\nMerged array :\n "); 
+	print_array(m,s1+s2); 
+	 
+	return 0; 
+} 
