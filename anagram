@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	char ans[5];
+
+	do {
+		char s1[10], s2[10]; 
+		printf("Enter a first string:");
+		gets(s1); 
+		printf("Enter a second string:");
+		gets(s2); 
+
+		int l1 = strlen(s1); 
+		int l2 = strlen(s2);
+		int i, j, anag = 0;
+
+		if (l1 == l2)
+		{ 
+
+			for (i = 0; i < l1; i++)
+			{ 
+				anag = 0;
+
+				for (j = 0; j < l1; j++)
+				{
+
+					if (s1[i] == s2[j])
+					{
+						anag = 1;
+						break;
+					}
+				}
+				if (anag == 0)
+				{
+					break;
+				}
+			}
+			if (anag == 0)
+			{ 
+				printf("%s and %s are not anagrams!", s1, s2);
+			}
+			else
+			{
+				printf("%s and %s are anagrams!", s1, s2);
+			}
+		}
+		else
+		{
+			printf("%s and %s are not anagrams!", s1, s2);
+		}
+		
+		
+		{
+  		
+			printf("\nAlphabetical order of two strings:");
+
+			if (strcmp(s1, s2) <= 0)
+			{
+				printf("%s %s\n", s1, s2);
+			}
+			else
+			{
+				printf("%s %s\n", s2, s1);
+			}
+		}
+		printf("\nDo you want to continue:");
+		gets(ans);
+	} while (strcmp(ans, "yes") == 0);
+
+	return 0;
+	
+}
