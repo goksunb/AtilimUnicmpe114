@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<string.h>
+#include<conio.h>
+
+int main()
+{
+	char ans[5];
+	
+	
+	do{
+	
+    	char s1[10],s2[10];//store string in s1 and s2
+		printf("Enter a first string:");
+		gets(s1);//read s1
+		printf("Enter a second string:");
+		gets(s2);//read s2 
+		
+	
+		int l1=strlen(s1);//get the lengths of strings
+		int l2=strlen(s2);
+		int i,j,anag=0;
+	
+		if(l1==l2)
+		{//If lengths are equal
+		
+			for(i=0;i<l1;i++)
+			{//compare characters of first string with second string
+				anag=0;
+			
+				for(j=0;j<l1;j++)
+				{
+				
+					if(s1[i]==s2[j])
+					{
+						anag=1;
+						break;
+					}
+				}
+				if(anag==0)
+				{
+					break;
+				}
+			}	
+			if(anag==0)
+			{//after loop if no character matches, then they are not anagrams
+				printf("%s and %s are not anagrams!",s1,s2);
+			}
+			else
+			{
+				printf("%s and %s are anagrams!",s1,s2);
+			}
+		}	
+		else
+		{
+			printf("%s and %s are not anagrams!",s1,s2);
+		}	
+
+    	printf("\nAlphabetical order of two strings:");
+
+		if (strcmp(s1, s2) <= 0)
+		{
+       	 printf("%s %s\n", s1, s2);
+    	} 
+		else 
+		{
+       	 	printf("%s %s\n", s2, s1);
+    	}
+    	
+    printf("Do you want to continue:");
+    scanf("%s",&ans);
+  
+	}while (strcmp(ans, "yes") == 0);
+	
+	return 0;
+	
+}
