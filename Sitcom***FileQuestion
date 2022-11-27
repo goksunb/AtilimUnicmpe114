@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+struct sitcoms
+{
+    char name[20];
+    int start_year;
+    int end_year;
+};
+int main()
+{
+   struct sitcoms s[4];
+   char players[4][50];
+
+   FILE *f1,*f2;
+   f1 = fopen("input.txt","r");
+   f2 = fopen("output.txt","w");
+
+
+   char line[100];
+   int line_number = 0;
+   while(fgets(line,sizeof(line),f1))
+   {
+      
+      char words[20][20];
+      int it=0,j=0;
+
+        for(int i=0;1;i++)
+        {
+                if(line[i]!=' ' && line[i]!='\n')
+        {
+                         words[it][j++]=line[i];
+                }
+                else
+        {
+                         words[it][j++]='\0';
+                         it++;
+                         j=0;
+                }
+                if(line[i]=='\0')
+                    break;
+         }
+
+      for(int k=0;k<strlen(words[0]);k++)
+      s[line_number].name[k] = words[0][k];
+      s[line_number].name[strlen(words[0])]='\0';
+
+    /*Str parametresi ile gösterilen karakter dizisini int bir değere çevirir.
+ascii to integer kısaltması atoi
+Fonksiyon, önce boşluk karakteri içermeyen ilk karakteri bulana kadar boşluk atlar. 
+Daha sonra, bu karakterden başlayarak, int değer içeriğine benzeyen karakterleri sayısal değerlere çevirir. 
+Karakter dizisindeki son geçerli karakterden sonraki karakterler dikkate alınmaz.
+Description
+The C library function int atoi(const char *str) converts the string argument str to an integer (type int).
+Declaration
+int atoi(const char *str)
+	 */
+	  s[line_number].start_year = atoi(words[5]);
+      s[line_number].end_year = atoi(words[5]);
+      
+
+      fprintf(f2,"%s",s[line_number].name);
+      fprintf(f2," %s ","lasted");
+      fprintf(f2,"%d ",s[line_number].end_year-s[line_number].start_year);
+      fprintf(f2,"%s","seasons\n");
+
+      printf("Enter 3 players of %s: ",s[line_number].name);
+      scanf("%[^\n]%*c", players[line_number]);
+
+      fprintf(f2,"%s","Characters: ");
+      fprintf(f2,"%s\n",players[line_number]);
+      line_number++;
+
+   }
+
+
+
+   return 0;
+}
