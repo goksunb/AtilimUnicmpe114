@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void fcn(int bet_type, int specific_num, char *status, int *sum_of_dices);
+void dices(int *number);
+
+int main()
+{
+    
+    int accountBalance, betAmount, betType, sumOfDices, specificNum;
+    char status, choice;
+
+    printf("Enter a start account for the game $:");
+    scanf("%d", &accountBalance);
+    do
+    {
+        printf("Enter the bet amount: ");
+        scanf("%d", &betAmount);
+        do
+        {
+            printf("Enter '1' to bet on numbers between 2-6, '2' to bet on numbers between 7-12, or '3' to bet on a specific number: ");
+            scanf("%d", &betType);
+        } while (betType < 1 || betType > 3);
+
+        if (betType == 3)
+        {
+            printf("Enter a number between 2-12: ");
+            scanf("%d", &specificNum);
+        }
+        else
+        {
+            specificNum = 0;
+        }
+        fcn(betType, specificNum, &status, &sumOfDices);
+        printf("Dices are thrown. Summation is %d\n", sumOfDices);
+        if (status == 'W')
+        {
+            printf("You win this round!\n");
+            if (betType == 3)
+                accountBalance += 15 * betAmount;
+            else
+                accountBalance += betAmount;
+        }
+        else
+        {
+            printf("You lost this round!\n");
+            accountBalance -= betAmount;
+        }
+
+        printf("Your total currency is %d\n", accountBalance);
+        if (accountBalance == 0)
+        {
+            printf("You've lost all of your money\n");
+            break;
+        }
+
+        
+        printf("Do you want to continue: Y/N:");
+        scanf("%c", &choice);
+        choice = toupper(choice);
+        while (choice != 'Y' && choice != 'N')
+        {
+            
+            printf("Wrong input, please enter again.\n");
+            printf("Do you want to continue: Y/N:");
+            scanf("%c", &choice);
+            choice = toupper(choice);
+        }
+    } while (choice == 'Y');
+    printf("Thank you for playing. See you next time!\n");
+    return 0;
+}
+
+void dices(int *number)
+{
+    *number = rand() % 13;
+}
+
+void fcn(int bet_type, int specific_num, char *status, int *sum_of_dices)
+{
+    switch (bet_type)
+    {
+    case 1:
+        dices(sum_of_dices);
+        if (*sum_of_dices >= 2 && *sum_of_dices <= 6)
+            *status = 'W';
+        else
+            *status = 'L';
+        break;
+    case 2:
+        dices(sum_of_dices);
+        if (*sum_of_dices >= 7 && *sum_of_dices <= 12)
+            *status = 'W';
+        else
+            *status = 'L';
+        break;
+    case 3:
+        dices(sum_of_dices);
+        if (*sum_of_dices == specific_num)
+            *status = 'W';
+        else
+            *status = 'L';
+        break;
+    }
+}
