@@ -1,0 +1,57 @@
+#include<stdio.h>
+// calculating score//
+int calcScore(int pts,int*loosingGame)
+  {
+	int score=pts-*loosingGame;
+	return score;
+  }
+// adding score into an array//
+void arrayResult(int arr[], int index, int score)
+  {
+  	arr[index]=score;
+  	printf("Added a result array as a score %d\n",score);
+  }
+// max score//
+void findmaxScore(int arr[],int n)
+   {
+    int max=-1;
+     int index=0,i;
+
+       for(i=1;i<n;i++)
+	   {
+
+           if(max<arr[i])
+		   {
+            max=arr[i];
+            index=i;
+           }   
+       }
+       
+    printf("\nTeam %d gets (%d) as a score.\n",index+1,max);
+     
+   }
+   
+void main()
+
+ {
+	int scores[5];
+	int i;
+	int teamNo;
+	int score,points,lost;
+	
+	  for(i=0;i<5;i++)
+   {
+	printf("Enter the team number: ");
+	scanf("%d",&teamNo);
+	
+	printf("Enter the points and loosing game: ");
+	scanf("%d",&points);
+	scanf("%d",&lost);
+	
+   score=calcScore(points,&lost);
+   printf("Score is: %d\n",score);
+   arrayResult(scores,i,score);
+   }
+
+   findmaxScore(scores,5);
+ }
