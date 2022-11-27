@@ -1,0 +1,55 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<string.h>
+
+struct city
+{
+   char city_name[20];
+   float high_temp;
+   float low_temp;
+};
+void myfunc(struct city citems[], char cityname[])
+{
+   float diff = citems[0].high_temp - citems[0].low_temp;
+   strcpy(cityname, citems[0].city_name);
+
+   for (int i = 0; i < 20; i++)
+   {
+       if ((citems[i].high_temp - citems[i].low_temp) > diff)
+       {
+           diff = citems[i].high_temp - citems[i].low_temp;
+           strcpy(cityname, citems[i].city_name);
+       }
+   }
+   return;
+}
+int main()
+{
+   //declare array of struct
+   struct city citems[20];
+   char city_name[20];
+   float high_temp, low_temp;
+   int i;
+
+   //take input from user
+   for (i = 0; i < 20; i++)
+   {
+       printf("Enter city name: ");
+       do
+       {
+           fgets(city_name, 20, stdin);
+       } while (city_name[0] == '\n');
+       city_name[strlen(city_name) - 1] = '\0';
+       printf("Enter lowest temperature: ");
+       scanf("%f", &low_temp);
+       printf("Enter highest temperature: ");
+       scanf("%f", &high_temp);
+       strcpy(citems[i].city_name, city_name);
+       citems[i].low_temp = low_temp;
+       citems[i].high_temp = high_temp;
+      
+   }
+   //call function
+   myfunc(citems, city_name);
+   printf("%s has highest temperature difference\n", city_name);
+}
