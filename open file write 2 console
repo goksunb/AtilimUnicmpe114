@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+int main()
+{
+   char karakter;
+   FILE *filePointer;
+   char fileName[20] = "test.txt";
+   
+
+   printf("\n test.txt dosyasi okunuyor...:\n");
+
+   filePointer = fopen(fileName, "r");	
+   if(filePointer ==NULL)
+   {
+      printf(" Dosya acilirken hata!");
+      exit(1);
+   }
+ 
+ 
+    karakter = fgetc(filePointer);
+    while (karakter != EOF)
+	{
+		printf ("%c", karakter);
+		karakter = fgetc(filePointer);
+	}
+ 
+   fclose(filePointer);
+   printf("\n Dosya basariyla okundu. \n", fileName);
+   return 0;
+}
