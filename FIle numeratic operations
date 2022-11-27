@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+main()
+{
+
+FILE*nums,*operations,*res;
+int i,j;
+char ch;
+nums=fopen("nums.txt","r");
+operations=fopen("operations.txt","r");
+res=fopen("res.txt","w");
+while (!feof(nums) && !feof(operations))
+fscanf (nums,"%d %d",&i,&j);
+switch (ch)
+    {
+	case '+' : fprintf (res,"%d+%d=%d",i,j,i+j);
+	break;
+	case '-' : fprintf (res,"%d-%d=%d",i,j,i-j);
+	break;
+	case '*' : fprintf (res,"%d*%d=%d",i,j,i*j);
+	break;
+	case '/' : fprintf (res,"%d/%d=%d",i,j,i/j);
+	
+    }
+    
+fclose(res);
+fclose(operations);
+fclose(nums);}
