@@ -1,0 +1,62 @@
+#include <stdio.h>
+struct technical
+{
+    int ts1;
+    int ts2;
+    int ts3;
+};
+
+struct social
+{
+    int ss1;
+    int ss2;
+    int ss3;
+};
+
+struct applicant
+{
+    int id;
+    char name[20];
+    struct technical t;
+    struct social s;
+    float total;
+};
+
+int main()
+{
+    int n,i,j;
+    printf("Enter the number of applicants : ");
+    scanf("%d",&n);
+    
+    struct applicant applicants[n];
+           for(i=0;i<n;i++)
+    {
+        printf("Enter ID :  ");
+         scanf("%d",&applicants[i].id);
+        
+		printf("Enter  name : ");
+         scanf("%s",applicants[i].name);
+        
+		printf("Enter technical skill point : ");
+         scanf("%d %d %d",&applicants[i].t.ts1,&applicants[i].t.ts2,&applicants[i].t.ts3);
+        
+		printf("Enter social skill point : ");
+         scanf("%d %d %d",&applicants[i].s.ss1,&applicants[i].s.ss2,&applicants[i].s.ss3);
+          
+		  float tech = (float)60/100*(applicants[i].t.ts1 + applicants[i].t.ts2 +  applicants[i].t.ts3)/3;
+          
+		  float skill = (float)40/100*(applicants[i].s.ss1 + applicants[i].s.ss2 + applicants[i].s.ss3)/3;
+        
+		applicants[i].total = tech + skill ;
+    }
+     		for(j=0;j<n;j++)
+    		{
+    			if(applicants[j].total>7)
+    			{
+    				printf("Applicant %s is qualified for an interview.",applicants[j].name);
+				}
+    	
+			}
+
+    return 0;
+}
